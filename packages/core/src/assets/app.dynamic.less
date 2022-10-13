@@ -1,0 +1,37 @@
+@margins-set: {
+    mgt: margin-top;
+    mgb: margin-bottom;
+    mgl: margin-left;
+    mgr: margin-right;
+    mg: margin;
+};
+
+@paddings-set: {
+    pdt: padding-top;
+    pdb: padding-bottom;
+    pdl: padding-left;
+    pdr: padding-right;
+    pd: padding;
+};
+
+@steps: range(2, 48, 2);
+
+each(@steps, {
+
+    each(@margins-set, .(@mv, @mk, @mi) {
+        .@{mk}_@{value} {
+            @{mv}: (@value * 1px)
+        }
+    })
+    each(@paddings-set, .(@pv, @pk, @pi) {
+        .@{pk}_@{value} {
+            @{pv}: (@value * 1px)
+        }
+    })
+});
+// 动态生成12~22单位，步长为1的font-size
+each(range(12, 28, 1), {
+    .fs_@{value} {
+        font-size: (@value * 1px);
+    }
+});

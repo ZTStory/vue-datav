@@ -1,0 +1,34 @@
+{
+    "name": "vue-datav",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev:demo": "pnpm -F demo dev",
+        "build:xsjc": "pnpm -F demo build"
+    },
+    "dependencies": {
+        "axios": "^0.27.2",
+        "echarts": "^5.3.3",
+        "vue3-seamless-scroll": "^2.0.1",
+        "vue": "^3.2.37"
+    },
+    "devDependencies": {
+        "@types/node": "^18.7.18",
+        "@vitejs/plugin-vue": "^3.1.0",
+        "typescript": "^4.6.4",
+        "vite": "^3.1.0",
+        "vue-tsc": "^0.40.4",
+        "less": "^4.1.2",
+        "postcss": "8.4.13",
+        "postcss-preset-env": "^7.4.3",
+        "postcss-px-to-viewport": "^1.1.1",
+        "vite-plugin-compression": "^0.5.1",
+        "vite-plugin-style-import": "^2.0.0",
+        "unplugin-vue-components": "^0.22.4",
+        "unplugin-vue-define-options": "^0.10.0"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}

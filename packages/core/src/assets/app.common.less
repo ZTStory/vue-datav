@@ -1,0 +1,173 @@
+// .colors
+.bg_f7 {
+    background: @bg-gray;
+}
+.bg_white {
+    background: @white;
+}
+
+.red {
+    color: @red;
+}
+.orange {
+    color: @orange;
+}
+.white {
+    color: @white;
+}
+.primary {
+    color: @primary;
+}
+
+.text_1 {
+    color: @text-1;
+}
+
+.text_2 {
+    color: @text-2;
+}
+
+.text_3 {
+    color: @text-3;
+}
+.text_4 {
+    color: @text-4;
+}
+.text_5 {
+    color: @text-5;
+}
+.text_6 {
+    color: @text-6;
+}
+
+.border_box {
+    box-sizing: border-box;
+}
+
+.font_bold {
+    font-weight: bold;
+}
+
+.bg_white {
+    background-color: @white;
+}
+
+// layout
+.bb_footer {
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+    position: relative;
+}
+
+.bb_header {
+    padding-top: constant(safe-area-inset-top);
+    padding-top: constant(safe-area-inset-top);
+    position: relative;
+}
+
+.w_100 {
+    width: 100%;
+}
+
+.h_100 {
+    height: 100%;
+}
+// input框特殊通用大小
+.w80 {
+    width: 80px;
+}
+// input框特殊通用大小
+.w100 {
+    width: 100px;
+}
+
+.over_hidden {
+    overflow: hidden;
+}
+.over_y_auto {
+    overflow-y: auto;
+}
+.over_x_auto {
+    overflow-y: auto;
+}
+.display_none {
+    display: none;
+}
+.display_in_block {
+    display: inline-block;
+}
+
+.border_box {
+    box-sizing: border-box;
+}
+
+.text_left {
+    text-align: left;
+}
+
+.text_right {
+    text-align: right;
+}
+
+.text_center {
+    text-align: center;
+}
+
+/* 单行... */
+.mutiple_line_1 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+
+/* 多行... */
+.mutiple_line_2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.mutiple_line_3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+.line_through {
+    text-decoration: line-through;
+}
+.line_break {
+    width: 100%;
+    height: 1px;
+    background-color: @line-break;
+}
+.blue_border {
+    border: solid @primary;
+    border-width: 0 2px 2px 0;
+}
+.pos_r {
+    position: relative;
+}
+.pos_a {
+    position: absolute;
+}
+.page_content {
+    background: @bg-gray;
+    overflow-y: auto;
+}
+// 适配iOS input disabled 颜色不正确问题
+input:disabled,
+input[disabled] {
+    color: @text-1;
+    -webkit-text-fill-color: @text-1;
+    opacity: 1;
+}
+
+input:disabled::placeholder,
+input[disabled]::placeholder {
+    color: @text-3;
+    -webkit-text-fill-color: @text-3;
+}

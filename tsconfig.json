@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "useDefineForClassFields": true,
+        "module": "umd",
+        "moduleResolution": "node",
+        "strict": true,
+        "jsx": "preserve",
+        "isolatedModules": false,
+        "esModuleInterop": true,
+        "lib": ["esnext", "dom"],
+        "skipLibCheck": true
+    }
+}

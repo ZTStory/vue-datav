@@ -1,0 +1,15 @@
+{
+    "name": "demo",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite --mode development",
+        "build": "vue-tsc --noEmit && vite build",
+        "build:test": "vue-tsc --noEmit && vite build --mode testing",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@ztstory/datav-core": "workspace:^1.0.0"
+    }
+}
