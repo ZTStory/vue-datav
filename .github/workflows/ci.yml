@@ -1,0 +1,32 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+    push:
+        branches: [main]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+    # This workflow contains a single job called "build"
+    build-and-deploy:
+        # The type of runner that the job will run on
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@master
+
+            - name: Install and Build
+              run: |
+                  pnpm install
+                  pnpm build:demo
+
+            - name: Deploy to GitHub Pages
+              uses: JamesIves/github-pages-deploy-action@v4.3.3
+              with:
+                  branch: gh-pages
+                  folder: projects/demo/dist
+                  token: ${{ secrets.ACCESS_TOKEN }}
+                  clean: true

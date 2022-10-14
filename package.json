@@ -2,10 +2,11 @@
     "name": "vue-datav",
     "version": "1.0.0",
     "description": "",
+    "homepage": "https://ztstory.github.io/vue-datav",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev:demo": "pnpm -F demo dev",
-        "build:xsjc": "pnpm -F demo build"
+        "build:demo": "pnpm -F demo build"
     },
     "dependencies": {
         "axios": "^0.27.2",
