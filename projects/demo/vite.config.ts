@@ -20,7 +20,7 @@ const pxtovw_config = pxtovw({
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: process.env.NODE_ENV !== "production" ? "/vue-datav/" : "",
+    base: process.env.NODE_ENV === "production" ? "/vue-datav/" : "/",
     plugins: [
         vue(),
         // gzip压缩
