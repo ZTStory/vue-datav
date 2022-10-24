@@ -52,8 +52,9 @@ const updateOptions = (opts: any) => {
 watch(
     () => props.opts,
     () => {
-        chartInstance?.setOption(props.opts);
+        // 先 resize，再 setOptions 否则动画会丢失
         chartInstance?.resize();
+        chartInstance?.setOption(props.opts);
     }
 );
 
