@@ -42,7 +42,7 @@ const w = computed(() => {
     height: v-bind(h);
     background: #012746;
     box-sizing: border-box;
-    padding: 12px 22px;
+    padding: 20px 22px;
 }
 .bb-screen__container {
     margin-top: 12px;

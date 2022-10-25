@@ -27,7 +27,7 @@ const categorys: string[] = [];
 const values: string[] = [];
 
 // 最小轮播值
-const minLoopLimit = 6;
+const minLoopLimit = 8;
 const minInterval = 8;
 
 const startDynamicData = () => {

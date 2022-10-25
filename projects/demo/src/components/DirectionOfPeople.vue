@@ -28,7 +28,7 @@ const opts = computed(() => {
     values.length = 0;
     try {
         props.flowDirectionList?.reverse().forEach((item, index) => {
-            if (index >= 7) {
+            if (index >= 8) {
                 throw false;
             }
             categorys.push(item.target);

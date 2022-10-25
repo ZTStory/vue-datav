@@ -1,9 +1,9 @@
 <template>
     <div class="flex_column pd_16 border_box w_100">
         <div class="flex_column">
-            <div class="text_2 fs_13 mgb_12">跳动数字2</div>
+            <div class="text_2 fs_13 mgb_20">跳动数字2</div>
             <dance-number :num="totalTicketCount" :max-length="5" color="#ACCEE0"></dance-number>
-            <card class="mgt_20" :width="310" :height="222" type="inner">
+            <card class="mgt_24" :width="310" :height="271" type="inner">
                 <div class="echart_content flex_1">
                     <zt-echart :opts="ticketTypeOpts"></zt-echart>
                 </div>
@@ -15,10 +15,10 @@
                 </div>
             </card>
         </div>
-        <div class="flex_column mgt_28">
-            <div class="text_2 fs_13 mgb_12">跳动数字3</div>
+        <div class="flex_column mgt_32">
+            <div class="text_2 fs_13 mgb_20">跳动数字3</div>
             <dance-number :num="totalTicketPrice" :max-length="6" color="#ACCEE0"></dance-number>
-            <card class="mgt_20" :width="310" :height="256" type="inner">
+            <card class="mgt_24" :width="310" :height="380" type="inner">
                 <div class="flex_row flex_wrap w_100 h_100 border_box pd_16">
                     <div
                         v-for="(item, index) in ticketPriceListRef"
@@ -28,7 +28,7 @@
                         <div class="flex_1">
                             <zt-echart :opts="item.opts"></zt-echart>
                         </div>
-                        <div class="white fs_13 w_100 text_center">{{ item.type }}</div>
+                        <div class="white fs_15 w_100 text_center">{{ item.type }}</div>
                     </div>
                 </div>
             </card>
@@ -96,8 +96,12 @@ const ticketTypeOpts = computed(() => {
         padding: [2, 6],
     };
     pieSeriesItem.labelLine = {
-        show: true
-    }
+        show: true,
+        smooth: true,
+        length: 5,
+        length2: 5,
+    };
+    pieSeriesItem.radius = [0, "60%"];
     pieOpts.series = [pieSeriesItem];
 
     return pieOpts;
@@ -131,11 +135,11 @@ const createTicketPriceBaseOpts = (color: string, count: number) => {
         series: [
             {
                 type: "pie",
-                radius: ["50%", "70%"],
+                radius: ["50%", "65%"],
                 top: -10,
                 left: -10,
                 right: -10,
-                bottom: -15,
+                bottom: 0,
                 labelLine: {
                     show: false,
                 },

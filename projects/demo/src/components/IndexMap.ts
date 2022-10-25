@@ -78,10 +78,10 @@ export const mapOpts = {
     geo: {
         map: "ZheJiang",
         zlevel: 99,
-        bottom: 10,
-        left: 80,
-        right: 70,
-        top: 30,
+        bottom: 60,
+        left: 60,
+        right: 60,
+        top: 60,
         show: true,
         layoutCenter: ["50%", "50%"],
         label: {

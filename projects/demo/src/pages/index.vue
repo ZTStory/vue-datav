@@ -1,20 +1,20 @@
 <template>
-    <screen :height="821" title="数据监控平台" :textWidth="250">
-        <div class="flex_row flex_between">
+    <screen :height="1080" title="数据监控平台" :textWidth="250">
+        <div class="flex_row flex_between mgt_12">
             <div class="flex_column flex_between">
-                <card :width="346" :height="246" text="柱状图1">
+                <card :width="346" :height="309" text="柱状图1">
                     <DeparturesNumber :shift-list="historyData?.shiftList"
                 /></card>
-                <card :width="346" :height="246" text="柱状图1">
+                <card :width="346" :height="309" text="柱状图1">
                     <CheckNumber :people-list="historyData?.peopleList" />
                 </card>
-                <card :width="346" :height="206" text="横向柱状图3">
+                <card :width="346" :height="314" text="横向柱状图3">
                     <ArriveNumber :flow-direction-list="historyData?.flowDirectionList" />
                 </card>
             </div>
             <div class="flex_column">
                 <div class="flex_row flex_between mgb_12">
-                    <card :width="1160" :height="504" corner>
+                    <card :width="1160" :height="630" corner>
                         <div class="flex_row_center flex_between border_box pd_20 w_100 h_100">
                             <HotlineTop10 :datas="historyData?.hotRouteList" />
                             <div class="flex_1 flex_column_center h_100">
@@ -38,18 +38,18 @@
                     </card>
                 </div>
                 <div class="flex_row flex_between">
-                    <card :width="784" :height="208">
+                    <card :width="784" :height="314">
                         <BasicData
                             :price-list="historyData?.priceList"
                             :age-list="historyData?.ageList"
                             :sex-list="historyData?.sexList" />
                     </card>
-                    <card :width="365" :height="206" text="横向柱状图3">
+                    <card :width="365" :height="314" text="横向柱状图3">
                         <DirectionOfPeople :flow-direction-list="realtimeData?.flowDirectionList" />
                     </card>
                 </div>
             </div>
-            <card :width="346" :height="723" text="组合图表">
+            <card :width="346" :height="958" text="组合图表">
                 <RealtimeTicketPrice
                     :ticket-price-list="realtimeData?.ticketPriceList"
                     :ticket-type-list="realtimeData?.ticketTypeList" />

@@ -1,11 +1,11 @@
 <template>
     <div class="flex_column">
-        <card :width="343" :height="220" type="inner" text="折线面积图1">
+        <card :width="343" :height="272" type="inner" text="折线面积图1">
             <div class="echart_content">
                 <zt-echart :opts="saleOpts"></zt-echart>
             </div>
         </card>
-        <card class="mgt_14" :width="343" :height="220" type="inner" text="折线面积图2">
+        <card class="mgt_14" :width="343" :height="272" type="inner" text="折线面积图2">
             <div class="echart_content">
                 <zt-echart :opts="checkOpts"></zt-echart>
             </div>

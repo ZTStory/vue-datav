@@ -16,8 +16,8 @@ export enum BarDirectionEnum {
 export function createBarOpts(colors: BBColors[], categorys?: string[], direction = BarDirectionEnum.Vertical): any {
     return {
         grid: {
-            top: 20,
-            bottom: 20,
+            top: 30,
+            bottom: 30,
         },
         color: initColorOpts(colors, direction),
         xAxis: init_xAxis(direction, categorys),

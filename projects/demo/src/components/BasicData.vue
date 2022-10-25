@@ -2,13 +2,13 @@
     <div class="flex_row flex_between w_100 h_100 border_box pdl_16 pdr_16">
         <div>
             <card-title :width="274" text="环状图1"></card-title>
-            <card class="mgt_8" :width="274" :height="160" type="inner">
+            <card class="mgt_8" :width="274" :height="250" type="inner">
                 <div class="flex_row_center h_100 w_100 border_box pd_16">
                     <div class="legend">
                         <div
                             v-for="(price, index) in priceListRef"
                             :key="index"
-                            class="legend_item flex_row_center mgb_12">
+                            class="legend_item flex_row_center mgb_28">
                             <span class="legend_item_icon mgr_8" :style="{ background: price.color }"></span>
                             <span class="legend_item_range flex_1 mgr_8">{{ price.rangeFormat }}</span>
                             <span class="legend_item_percentage">{{ price.percentage }}</span>
@@ -22,10 +22,10 @@
         </div>
         <div>
             <card-title :width="274" text="环状图2"></card-title>
-            <card class="mgt_8" :width="274" :height="160" type="inner">
+            <card class="mgt_8" :width="274" :height="250" type="inner">
                 <div class="flex_row_center h_100 w_100 border_box pd_16">
                     <div class="legend">
-                        <div v-for="(age, index) in ageListRef" :key="index" class="legend_item flex_row_center mgb_12">
+                        <div v-for="(age, index) in ageListRef" :key="index" class="legend_item flex_row_center mgb_28">
                             <span class="legend_item_icon mgr_8" :style="{ background: age.color }"></span>
                             <span class="legend_item_range flex_1 mgr_8">{{ age.rangeFormat }}</span>
                             <span class="legend_item_percentage">{{ age.percentage }}</span>
@@ -39,7 +39,7 @@
         </div>
         <div>
             <card-title :width="160" text="性别"></card-title>
-            <card class="mgt_8 border_box pd_20" :width="160" :height="160" type="inner">
+            <card class="mgt_8 border_box pd_20" :width="160" :height="250" type="inner">
                 <div class="flex_row_center flex_between w_100 h_100 pdl_20 pdr_10 border_box">
                     <div
                         v-for="(sex, index) in sexListRef"
