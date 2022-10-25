@@ -46,7 +46,7 @@ const opts = computed(() => {
         top: 0,
         bottom: 0,
         left: 0,
-        right: "5%",
+        right: 25,
         containLabel: true,
         height: "100%",
     };

@@ -18,6 +18,7 @@ export function createBarOpts(colors: BBColors[], categorys?: string[], directio
         grid: {
             top: 30,
             bottom: 30,
+            left: 40
         },
         color: initColorOpts(colors, direction),
         xAxis: init_xAxis(direction, categorys),

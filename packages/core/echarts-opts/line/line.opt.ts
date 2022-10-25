@@ -89,7 +89,7 @@ export function createLineOpts(colors: BBColors[], categorys?: string[]): any {
         grid: {
             top: 20,
             bottom: 20,
-            left: 30,
+            left: 40,
             right: 0,
         },
         color: createColorOpts(colors),
