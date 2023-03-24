@@ -1,66 +1,68 @@
 <template>
-    <screen :height="1080" title="数据监控平台" :textWidth="250">
-        <div class="flex_row flex_between mgt_12">
-            <div class="flex_column flex_between">
-                <card :width="346" :height="309" text="柱状图1">
-                    <DeparturesNumber :shift-list="historyData?.shiftList"
-                /></card>
-                <card :width="346" :height="309" text="柱状图1">
-                    <CheckNumber :people-list="historyData?.peopleList" />
-                </card>
-                <card :width="346" :height="314" text="横向柱状图3">
-                    <ArriveNumber :flow-direction-list="historyData?.flowDirectionList" />
-                </card>
-            </div>
-            <div class="flex_column">
-                <div class="flex_row flex_between mgb_12">
-                    <card :width="1160" :height="630" corner>
-                        <div class="flex_row_center flex_between border_box pd_20 w_100 h_100">
-                            <HotlineTop10 :datas="historyData?.hotRouteList" />
-                            <div class="flex_1 flex_column_center h_100">
-                                <div class="flex_none">
-                                    <div class="white fs_14 mgb_12">跳动数字</div>
-                                    <dance-number
-                                        :num="accumulatedSaleTicket"
-                                        :max-length="8"
-                                        color="#ff7700"></dance-number>
-                                </div>
-                                <div class="flex_1 w_100">
-                                    <div class="w_100 h_100">
-                                        <zt-echart :opts="mapOpts" :geo-json="mapJson"></zt-echart>
+    <ZtScale>
+        <screen :height="1080" title="数据监控平台" :textWidth="250">
+            <div class="flex_row flex_between mgt_12">
+                <div class="flex_column flex_between">
+                    <card :width="346" :height="309" text="柱状图1">
+                        <DeparturesNumber :shift-list="historyData?.shiftList"
+                    /></card>
+                    <card :width="346" :height="309" text="柱状图1">
+                        <CheckNumber :people-list="historyData?.peopleList" />
+                    </card>
+                    <card :width="346" :height="314" text="横向柱状图3">
+                        <ArriveNumber :flow-direction-list="historyData?.flowDirectionList" />
+                    </card>
+                </div>
+                <div class="flex_column">
+                    <div class="flex_row flex_between mgb_12">
+                        <card :width="1160" :height="630" corner>
+                            <div class="flex_row_center flex_between border_box pd_20 w_100 h_100">
+                                <HotlineTop10 :datas="historyData?.hotRouteList" />
+                                <div class="flex_1 flex_column_center h_100">
+                                    <div class="flex_none">
+                                        <div class="white fs_14 mgb_12">跳动数字</div>
+                                        <dance-number
+                                            :num="accumulatedSaleTicket"
+                                            :max-length="8"
+                                            color="#ff7700"></dance-number>
+                                    </div>
+                                    <div class="flex_1 w_100">
+                                        <div class="w_100 h_100">
+                                            <zt-echart :opts="mapOpts" :geo-json="mapJson"></zt-echart>
+                                        </div>
                                     </div>
                                 </div>
+                                <RealtimeTicketCount
+                                    :sale-ticket-list="realtimeData?.saleTicketList"
+                                    :check-ticket-list="realtimeData?.checkTicketList" />
                             </div>
-                            <RealtimeTicketCount
-                                :sale-ticket-list="realtimeData?.saleTicketList"
-                                :check-ticket-list="realtimeData?.checkTicketList" />
-                        </div>
-                    </card>
+                        </card>
+                    </div>
+                    <div class="flex_row flex_between">
+                        <card :width="784" :height="314">
+                            <BasicData
+                                :price-list="historyData?.priceList"
+                                :age-list="historyData?.ageList"
+                                :sex-list="historyData?.sexList" />
+                        </card>
+                        <card :width="365" :height="314" text="横向柱状图3">
+                            <DirectionOfPeople :flow-direction-list="realtimeData?.flowDirectionList" />
+                        </card>
+                    </div>
                 </div>
-                <div class="flex_row flex_between">
-                    <card :width="784" :height="314">
-                        <BasicData
-                            :price-list="historyData?.priceList"
-                            :age-list="historyData?.ageList"
-                            :sex-list="historyData?.sexList" />
-                    </card>
-                    <card :width="365" :height="314" text="横向柱状图3">
-                        <DirectionOfPeople :flow-direction-list="realtimeData?.flowDirectionList" />
-                    </card>
-                </div>
+                <card :width="346" :height="958" text="组合图表">
+                    <RealtimeTicketPrice
+                        :ticket-price-list="realtimeData?.ticketPriceList"
+                        :ticket-type-list="realtimeData?.ticketTypeList" />
+                </card>
             </div>
-            <card :width="346" :height="958" text="组合图表">
-                <RealtimeTicketPrice
-                    :ticket-price-list="realtimeData?.ticketPriceList"
-                    :ticket-type-list="realtimeData?.ticketTypeList" />
-            </card>
-        </div>
-    </screen>
+        </screen>
+    </ZtScale>
 </template>
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
-import { Screen, Card, DanceNumber, ZtEchart } from "@ztstory/datav-core";
+import { Screen, Card, DanceNumber, ZtEchart, ZtScale } from "@ztstory/datav-core";
 import { EventBusUtils } from "@ztstory/datav-core/src/utils/eventbus.util";
 import { throttle } from "@ztstory/datav-core/src/utils/common.util";
 import HotlineTop10 from "../components/HotlineTop10.vue";
@@ -106,7 +108,7 @@ const createBarDatas = () => {
         datas.push({
             timestamp: date.getDate(),
             dateFormat: DateUtils.date2String(date, "YYYY-MM-DD"),
-            count: Math.floor(Math.random() * 1000).toString(),
+            count: Math.floor(Math.random() * 2000).toString(),
         });
     }
     return datas;

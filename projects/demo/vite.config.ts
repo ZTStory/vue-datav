@@ -39,9 +39,10 @@ export default defineConfig({
         },
     },
     css: {
-        postcss: {
-            plugins: [pxtovw_config],
-        },
+        // 调整为 scale 方案
+        // postcss: {
+        //     plugins: [pxtovw_config],
+        // },
         preprocessorOptions: {
             less: {
                 javascriptEnabled: true,

@@ -1,11 +1,59 @@
 # vue-datav 大屏可视化框架模板
 
+## 修改记录
+
+### 1、将 vw 方案替换为 scale 方案
+
+> 经实际运行情况分析，由于部分线下场景的大屏是笔记本或一些台机投屏的，所以分辨率会受到主机屏幕分辨率的影响，导致 vw 在某些情况下字体偏大，从而导致换行甚至影响布局，故综合考虑采用 scale 方案保持页面布局不受影响
+
+修改方式如下：
+
+```typescript
+// vite.config.ts
+// 删除 pxtovw_config 相关配置代码
+css: {
+    // postcss: {
+    //     plugins: [pxtovw_config],
+    // },
+    preprocessorOptions: {
+        less: {
+            javascriptEnabled: true,
+            additionalData: `@import "@/assets/app.variable.less";`,
+        },
+    },
+}
+
+// packages/core/src/utils/string.util.ts
+// 不进行 px2vw 的单位转换
+function px2vw(px: number, root: number = 1920, fixed = 6) {
+    // 已替换为 scale 方案，代码保留仅供参考
+    // const res = (px / root) * 100;
+    // return `${res.toFixed(fixed)}vw`;
+    return `${px}px`;
+}
+
+
+```
+
+最后：
+
+```vue
+// 首页引入 ZtScale 组件即可
+<ZtScale>
+    ...
+</ZtScale>
+```
+
 原文阅读：[https://juejin.cn/post/7153457400974934053/](https://juejin.cn/post/7153457400974934053/)
+
 ## 起源
+
 原本公司项目都是完成一些后台管理的内容还有移动端的内容，最近商务那边对接了两个关于可视化大屏的项目，虽说公司前端在此类项目上面没有什么经验积累，但毕竟没吃过猪肉还是见过猪跑的，在着手开发之前，需要先准备一些解决通用问题的开发框架，方便后续相关大屏项目的快速迭代。
 
 ## 思考
->关于可视化大屏项目的开荒，我总结了以下几个问题
+
+> 关于可视化大屏项目的开荒，我总结了以下几个问题
+
 1. 可视化图表库应该如何选择？
 2. 大屏开发框架应该如何搭建？
 3. 大屏基础组件应该如何设计与实现？
@@ -13,7 +61,9 @@
 5. 大屏项目开发代码结构该如何组织？
 
 ## 调研与落地
+
 #### 1、可视化图标库应该如何选择？
+
 鉴于可视化技术已经相对成熟了，市面上的开源可视化图表库也是繁华缭乱的，那我们应该怎么选择呢？
 
 关于这个问题，我个人也是查阅了很多资料，看了一些图表库的官方文档及示例，结合一些内容作者的分享成果作以下分析：
@@ -31,9 +81,9 @@ ECharts.js 最早是由[百度技术团队](https://echarts.baidu.com)维护的�
 
 **2）Chart.js**
 
->英文原版：https://www.chartjs.org
+> 英文原版：https://www.chartjs.org
 >
->中文版：https://chartjs.bootcss.com
+> 中文版：https://chartjs.bootcss.com
 
 同样作为一款文档支持中英文的图表库，我也是把它纳入了对比范围
 
@@ -43,23 +93,25 @@ ECharts.js 最早是由[百度技术团队](https://echarts.baidu.com)维护的�
 
 **3) Antv**
 
->官网：https://antv.vision/zh
+> 官网：https://antv.vision/zh
 >
->国内镜像：https://antv.gitee.io/zh/
+> 国内镜像：https://antv.gitee.io/zh/
 
 Antv 是我一开始比较看好的一个可视化图表库，它的产品系列划分很多，根据不同的图表类型也分了很多不同的产品线
-* `G2`（可视化图形）、`G2Plot`（通用图表库）
-* `S2`（多维可视分析表格）
-* `G6`（关系数据图分析工具）
-* `X6`（图编辑引擎）
-* `L7`（地理空间数据可视化）
-* `F2`（专注移动端的可视化解决方案）
+
+-   `G2`（可视化图形）、`G2Plot`（通用图表库）
+-   `S2`（多维可视分析表格）
+-   `G6`（关系数据图分析工具）
+-   `X6`（图编辑引擎）
+-   `L7`（地理空间数据可视化）
+-   `F2`（专注移动端的可视化解决方案）
 
 文档的质量毕竟大厂的产品，还是非常能打的，目前是免费使用的，但是后期是否会收费就不清楚了，目前看这些项目在 `GitHub` 都是开源的 `MIT`，如果有符合需求的也可以考虑。
 
 但是也看到有人说引入后本地可以运行，但是部署在服务器发生了未知 bug，导致图像无法渲染，所以也就没有使用，毕竟没有深入了解过，或许这种问题已经修复了。
 
 **4) D3.js**
+
 > 官网：https://d3js.org/
 
 纯英文文档，相信这一条或许会劝退很多人，`GitHub` 有国内开发者翻译的 Api [中文手册](https://github.com/d3/d3/wiki/API--%E4%B8%AD%E6%96%87%E6%89%8B%E5%86%8C)，没有内置图表
@@ -96,13 +148,13 @@ Antv 是我一开始比较看好的一个可视化图表库，它的产品系列
 
 我对我们现有的可视化大屏项目做了这样几个拆分
 
->- Screen - 大屏
->- Screen Title - 大屏标题
->- Card - 数据内容卡片
->- Card Title - 数据卡片标题
->- Swiper - 大屏内容滚动
->- Dance Number - 跳动的数字
->- ECharts - 图表
+> -   Screen - 大屏
+> -   Screen Title - 大屏标题
+> -   Card - 数据内容卡片
+> -   Card Title - 数据卡片标题
+> -   Swiper - 大屏内容滚动
+> -   Dance Number - 跳动的数字
+> -   ECharts - 图表
 
 通过这样拆解，将 UI 视觉稿的内容细分为这几大模块并分别管理和实现，虽然不多，但足以应对目前的需求内容了，灵活度也足够，可以随视觉稿调整随时替换。
 
@@ -136,7 +188,7 @@ Antv 是我一开始比较看好的一个可视化图表库，它的产品系列
  * @param direction 垂直或水平 默认 垂直
  * @returns
  */
-function createBarOpts(colors: BBColors[], categorys?: string[], direction = BarDirectionEnum.Vertical): any
+function createBarOpts(colors: BBColors[], categorys?: string[], direction = BarDirectionEnum.Vertical): any;
 
 /**
  * 快捷创建 BarSeriesItem 对象
@@ -144,7 +196,7 @@ function createBarOpts(colors: BBColors[], categorys?: string[], direction = Bar
  * @param direction 垂直或水平 默认 垂直
  * @returns
  */
-function createBarSeriesItem(values?: any[], direction = BarDirectionEnum.Vertical): any
+function createBarSeriesItem(values?: any[], direction = BarDirectionEnum.Vertical): any;
 ```
 
 同样的，相同的思想我们可以用统一的 `Api` 风格扩展为 `createLineOpts、createLineSeriesItem、createPieOpts、createPieSeriesItem` 等等
@@ -156,10 +208,10 @@ const opts = coumputed(() => {
     const categorys: string[] = [];
     const values: string[] = [];
     // 处理接口数据
-    props.itemList?.forEach(item => {
+    props.itemList?.forEach((item) => {
         categorys.push(item.dateFormat);
         values.push(item.count);
-    })
+    });
     // 生成基本 bar 配置
     const barOpts = createBarOpts([createGradientColors(["#E6AE28", "#FF8A00"])], categorys);
     // 生成基本 barSeriesItem 配置
@@ -168,7 +220,7 @@ const opts = coumputed(() => {
     // barOpts.series = [createBarSeriesItem(values), createBarSeriesItem(values2)];
 
     return barOpts;
-})
+});
 ```
 
 一下子节省了好多代码有木有，业务上逻辑就会清晰不少，当然，barOpts 实际上也是一个常规的对象，如果有定制的修改配置的情况，也是完全支持够用的
@@ -177,19 +229,22 @@ const opts = coumputed(() => {
 
 查了很多资料，大致有这么几种解决方案：
 
-- rem
-- vw
-- scale 等比缩放
+-   rem
+-   vw
+-   scale 等比缩放
 
 相对于 `rem` 方案来说，个人更倾向于 `vw` 方案，毕竟 `rem` 横竖屏切换的时候会有问题（需要监听屏幕变化重新设置 `rootFontSize`），需要刷新过才可以，`vw` 就没有这个担忧。`transform` 的 `scale` 缩放也是很好用的，但是缩放毕竟存在字体可能模糊的情况（某些极端屏幕尺寸下才存在）
 
 这里我就简单介绍一下 `vw` 的适配方案：
 
 **1. 安装 postcss-px-to-viewport 插件**
+
 ```
 pnpm add postcss-px-to-viewport -D
 ```
+
 **2. 配置 postcss-px-to-viewport config**
+
 ```ts
 import pxtovw from "postcss-px-to-viewport";
 // postcss-px-to-viewport config
@@ -206,15 +261,18 @@ const pxtovw_config = pxtovw({
     replace: true, // 是否转换后直接更换属性值
 });
 ```
+
 **3. 代码中可以随意使用 px 会自动转换为 vw**
 
 但 `vw` 也存在弊端，比如如果有一些样式是通过 ts 设置的，就需要自己实现一个 `px2vw` 的方法进行转化。
+
 ```
 export function px2vw(px: number, root: number = 1920, fixed = 6) {
     const res = (px / root) * 100;
     return `${res.toFixed(fixed)}vw`;
 }
 ```
+
 **4、全局监听 window.resize 事件**
 
 这里需要注意的时候，建立一个**消息中心**，通过事件发布的方式通知每个图表进行自身的 `resize`，建议 `window.resize` 做 `throttle` 处理，提高性能。
@@ -225,8 +283,8 @@ export function px2vw(px: number, root: number = 1920, fixed = 6) {
 
 这里我谈一下我自己的思考：
 
-- 希望可以通过代码结构迅速了解到每个图表模块的相对位置
-- 快速调整大屏图表布局结构及尺寸
+-   希望可以通过代码结构迅速了解到每个图表模块的相对位置
+-   快速调整大屏图表布局结构及尺寸
 
 由于我们是 `vw` 的响应式设计，所以在进行布局的时候就严格按照设计稿的尺寸进行每个图表块的宽高进行设置。
 

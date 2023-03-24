@@ -14,6 +14,8 @@ export function randomString(count = 8) {
 }
 
 export function px2vw(px: number, root: number = 1920, fixed = 6) {
-    const res = (px / root) * 100;
-    return `${res.toFixed(fixed)}vw`;
+    // 已替换为 scale 方案，代码保留仅供参考
+    // const res = (px / root) * 100;
+    // return `${res.toFixed(fixed)}vw`;
+    return `${px}px`;
 }
